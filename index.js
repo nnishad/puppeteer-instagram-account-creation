@@ -9,7 +9,7 @@ export const index = () => {
     console.log('User is not available, so Initiating Signup Process')
   }
 
-  instagram.signin({}).then(r => { console.log('Program Executed') }).catch(e => console.error(e))
+  instagram.signup({}).then(r => { console.log('Program Executed') }).catch(e => console.error(e))
 }
 
 index()
