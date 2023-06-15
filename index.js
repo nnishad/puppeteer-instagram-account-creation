@@ -18,11 +18,11 @@ function prompt (question) {
   })
 }
 
-async function startProfile (profiles) {
+async function startProfile (profile) {
   // Replace profileId value with existing browser profile ID.
-  const profileId = 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+  const profileId = profile.uuid
   const mlaPort = 35000
-
+  logger.info(`profile uuid ${profileId}`)
   /* Send GET request to start the browser profile by profileId.
   Returns web socket as response which should be passed to puppeteer.connect */
   http.get(`http://127.0.0.1:${mlaPort}/api/v1/profile/start?automation=true&puppeteer=true&profileId=${profileId}`, (resp) => {
@@ -45,13 +45,11 @@ async function startProfile (profiles) {
       // eslint-disable-next-line no-prototype-builtins
       if (typeof ws === 'object' && ws.hasOwnProperty('value')) {
         console.log(`Browser websocket endpoint: ${ws.value}`)
-        profiles.forEach(profile => {
-          profile.remainingAccounts.forEach(() => {
-            new PuppeteerInstagram(ws.value, profile?.network?.proxy)
-              .signup(profile.uuid)
-              .then(r => { console.log('Program Executed') })
-              .catch(e => console.error(e))
-          })
+        profile.remainingAccounts.forEach(() => {
+          new PuppeteerInstagram(ws.value, profile?.network?.proxy)
+            .signup(profile.uuid)
+            .then(r => { console.log('Program Executed') })
+            .catch(e => console.error(e))
         })
       }
     })
@@ -80,7 +78,7 @@ async function main () {
   if (action === '1') {
     logger.info('Performing account creation...')
     try {
-      const response = await apiClient.get('http://localhost:3001/profile/generate/5')
+      const response = await apiClient.post('http://localhost:3001/profile/generate/5')
       logger.info('Data:', response)
     } catch (error) {
       logger.error('Account creation failed')
@@ -90,7 +88,9 @@ async function main () {
     try {
       const response = await apiClient.get('http://localhost:3001/profile/unused')
       logger.info('Data:', response)
-      await startProfile(response.profiles)
+      for (const profile of response.profiles) {
+        await startProfile(profile)
+      }
     } catch (error) {
       logger.error('Account creation failed' + error)
     }
