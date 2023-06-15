@@ -25,6 +25,7 @@
     "update-markdown-jsdoc": "^1.0.11"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
     "delay": "^6.0.0",
     "nodemon": "^2.0.22",
@@ -34,6 +35,7 @@
     "puppeteer-email": "^0.1.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "random": "^4.1.0"
+    "random": "^4.1.0",
+    "winston": "^3.9.0"
   }
 }
