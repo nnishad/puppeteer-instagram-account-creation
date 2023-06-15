@@ -35,7 +35,7 @@ async function startProfile (profile) {
 
     /* The whole response data has been received. Handling JSON Parse errors,
     verifying if ws is an object and contains the 'value' parameter. */
-    resp.on('end', () => {
+    resp.on('end', async () => {
       let ws
       try {
         ws = JSON.parse(data)
@@ -45,12 +45,12 @@ async function startProfile (profile) {
       // eslint-disable-next-line no-prototype-builtins
       if (typeof ws === 'object' && ws.hasOwnProperty('value')) {
         console.log(`Browser websocket endpoint: ${ws.value}`)
-        profile.remainingAccounts.forEach(() => {
-          new PuppeteerInstagram(ws.value, profile?.network?.proxy)
+        for (let idx = 0; idx < profile.remainingAccounts; idx++) {
+          await new PuppeteerInstagram(ws.value, profile?.network?.proxy)
             .signup(profile.uuid)
             .then(r => { console.log('Program Executed') })
             .catch(e => console.error(e))
-        })
+        }
       }
     })
   }).on('error', (err) => {
