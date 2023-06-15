@@ -64,8 +64,8 @@ async function main () {
 
   while (!validAction) {
     action = await prompt('Enter action to perform.\n' +
-      '1. Create Accounts\n' +
-      '2. Warmup Accounts\n' +
+      '1. Create Multilogin Profile\n' +
+      '2. Create Instagram Account\n' +
       '3. exit\n')
 
     if (action === '1' || action === '2' || action === '3') {
@@ -83,6 +83,7 @@ async function main () {
     } catch (error) {
       logger.error('Account creation failed')
     }
+    main()
   } else if (action === '2') {
     logger.info('Performing account warmup...')
     try {
@@ -94,6 +95,7 @@ async function main () {
     } catch (error) {
       logger.error('Account creation failed' + error)
     }
+    main()
   } else if (action === '3') {
     logger.info('Exiting the program...')
   }
