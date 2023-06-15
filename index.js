@@ -63,10 +63,13 @@ async function main () {
   let action
 
   while (!validAction) {
-    action = await prompt('Enter action to perform.\n' +
+    action = await prompt('=========\n' +
+      'Enter action to perform.\n' +
       '1. Create Multilogin Profile\n' +
       '2. Create Instagram Account\n' +
-      '3. exit\n')
+      '3. exit\n' +
+      '========= \n' +
+      'Please enter your input:')
 
     if (action === '1' || action === '2' || action === '3') {
       validAction = true
