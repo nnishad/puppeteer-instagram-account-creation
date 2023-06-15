@@ -9,7 +9,7 @@
   "reveal": true,
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js"
   },
   "engines": {
     "node": ">=8"
@@ -25,15 +25,19 @@
     "update-markdown-jsdoc": "^1.0.11"
   },
   "dependencies": {
+    "axios": "^1.4.0",
     "cheerio": "^1.0.0-rc.12",
     "delay": "^6.0.0",
     "nodemon": "^2.0.22",
     "p-map": "^6.0.0",
     "p-retry": "^5.1.2",
+    "prompt-sync": "^4.2.0",
+    "prompt-sync-history": "^1.0.1",
     "puppeteer": "^20.4.0",
     "puppeteer-email": "^0.1.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
-    "random": "^4.1.0"
+    "random": "^4.1.0",
+    "winston": "^3.9.0"
   }
 }
