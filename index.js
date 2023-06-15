@@ -81,41 +81,25 @@ async function main () {
     logger.info('Performing account creation...')
     try {
       const response = await apiClient.get('http://localhost:3001/profile/generate/5')
-      // Process the response data
       logger.info('Data:', response)
     } catch (error) {
       logger.error('Account creation failed')
     }
-    // Call your account creation function here
   } else if (action === '2') {
     logger.info('Performing account warmup...')
     try {
       const response = await apiClient.get('http://localhost:3001/profile/unused')
-      // Process the response data
       logger.info('Data:', response)
       await startProfile(response.profiles)
     } catch (error) {
       logger.error('Account creation failed' + error)
     }
-    /* const instagram = new PuppeteerInstagram({ headless: false })
-    instagram.signup({}).then(r => { console.log('Program Executed') }).catch(e => console.error(e)) */
-    // Call your account warmup function here
   } else if (action === '3') {
     logger.info('Exiting the program...')
   }
 }
 
 export const index = () => {
-  /*  const instagram = new PuppeteerInstagram({ headless: false })
-    if (instagram.isAuthenticated === false) {
-      console.error('Authentication does not verified')
-    }
-    if (instagram.user == null) {
-      console.log('User is not available, so Initiating Signup Process')
-    }
-
-    instagram.signup({}).then(r => { console.log('Program Executed') }).catch(e => console.error(e)) */
-
   main().catch((error) => console.error(error))
 }
 
